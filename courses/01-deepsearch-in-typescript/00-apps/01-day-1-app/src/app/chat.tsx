@@ -18,7 +18,7 @@ export const ChatPage = ({ userName, isAuthenticated }: ChatProps) => {
     input,
     handleInputChange,
     handleSubmit,
-    isLoading,
+    status,
   } = useChat({
     onError: (error) => {
       // If we get a 401 error, show the sign-in modal
@@ -27,6 +27,8 @@ export const ChatPage = ({ userName, isAuthenticated }: ChatProps) => {
       }
     },
   });
+
+  const isLoading = status === 'submitted' || status === 'streaming';
 
   const handleFormSubmit = (e: React.FormEvent) => {
     if (!isAuthenticated) {
